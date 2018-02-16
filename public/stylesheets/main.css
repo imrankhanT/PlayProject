@@ -1,0 +1,26 @@
+form {
+	border: 1px solid black;
+	background-color: #ECF0F1;
+	width: 40%;
+	align: center;
+	margin-left: 330px;
+}
+
+#submit {
+	cursor: pointer;
+	border: none;
+	color: white;
+	font-size: 16px;
+	margin: 4px 2px;
+	background-color: #008CBA;
+	padding: 10px 20px;
+}
+
+input{
+	border-radius:10px;
+	margin:10px;
+}
+
+.css{
+	padding:10px;
+}
