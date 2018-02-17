@@ -10,10 +10,12 @@ import dao.EmployeeDAO
 import dao.EmployeeDAO
 import model.Employee
 import play.api.libs.json.Json
-import model.CustomRead.EmployeeReads
-import model.CustomRead.EmployeeWrites
+import model.CustomRead._
 import scala.concurrent.Future
 import model.EmployeeDto
+import play.api.data.Forms._
+import play.api.data._
+import play.api.data.format.Formats._
 
 @Singleton
 class HomeController @Inject() (employeeDao: EmployeeDAO)(cc: ControllerComponents) extends AbstractController(cc) {
@@ -23,8 +25,6 @@ class HomeController @Inject() (employeeDao: EmployeeDAO)(cc: ControllerComponen
   }
 
   def insertEmployee = Action.async { request: Request[AnyContent] =>
-    /* var requestBody = request.body
-    Ok("The Body Content" + requestBody)*/
     request.body.asJson.map {
       c =>
         var emplyee: Employee = c.as[Employee];
@@ -43,25 +43,15 @@ class HomeController @Inject() (employeeDao: EmployeeDAO)(cc: ControllerComponen
   }
 
   def login = Action.async { request: Request[AnyContent] =>
-    /*  var employeeDto = request.body
-    employeeDao.findEmployeeByEmail(employeeDto.email).map{
-      emp => emp match{
-        case Some(employee) => Ok("Employee Availabe")
-        case None => Ok("")
-      }
-    }*/
 
-    val res: Option[Unit] = request.body.asJson.map {
+    request.body.asJson.map {
       emp =>
-        var employee: Employee = emp.as[Employee];
-        val emp: Employee = employeeDao.findEmployeeByEmail(employee.email).map {
-          emp7 =>
-            if (employee.password.equals(emp.password)) {
-              Ok("Login Scessfully...." + employee.name)
-            }
-        }
-
-    }
+        var emplyee: EmployeeDto = emp.as[EmployeeDto];
+        employeeDao.login(emplyee.email, emplyee.password).map(res =>
+          Ok("Login Scessfully........" + emplyee.email))
+    }.getOrElse(Future {
+      Ok("Login Fails..........")
+    })
   }
 
   def getEmployeeByEmail(email: String) = Action.async {
@@ -70,5 +60,4 @@ class HomeController @Inject() (employeeDao: EmployeeDAO)(cc: ControllerComponen
         Ok("User Found........" + emp))
 
   }
-
 }

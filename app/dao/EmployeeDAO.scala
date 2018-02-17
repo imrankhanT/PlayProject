@@ -21,8 +21,10 @@ class EmployeeDAO @Inject() (protected val dbconfigur: DatabaseConfigProvider)(i
   def findEmployeeByEmail(email: String): Future[Option[Employee]] =
     db.run(Employees.filter(e => e.email === email).result.headOption)
 
+  def login(email: String, password: String): Future[Option[Employee]] =
+    db.run(Employees.filter(e => e.email === email && e.password === password).result.headOption)
+
   def all(): Future[Seq[Employee]] = db.run(Employees.result)
-  
 
   private class EmployeeTable(tag: Tag) extends Table[Employee](tag, "Employee") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
@@ -30,6 +32,6 @@ class EmployeeDAO @Inject() (protected val dbconfigur: DatabaseConfigProvider)(i
     def email = column[String]("email")
     def phone = column[String]("phone")
     def password = column[String]("password")
-    def * = (id, name, email, phone, password) <> (Employee.tupled, Employee.unapply)
+    def * = (id,name, email, phone, password) <> (Employee.tupled, Employee.unapply)
   }
 }

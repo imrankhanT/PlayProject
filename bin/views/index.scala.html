@@ -1,5 +1,42 @@
 @()
 
-@main("Welcome to Play") {
-  <h1>Welcome to Play! And Play Se Karenge Sabka Swagat</h1>
+@main("Employee Form") {
+  
+<html>
+
+<body>
+
+<div ng-app="registerForm" ng-controller="employeeController">
+  <form>
+   <table>
+    <tr>
+    <td>Name: </td>
+    <td><input type="text" ng-model="employee.name" placeholder="Enter Name"></td>
+    </tr>
+    
+    <tr>
+    <td>Email: </td>
+    <td><input type="email" ng-model="employee.email" placeholder="Enter Email"></td>
+    </tr>
+    
+    <tr>
+    <td>Phone: </td>
+    <td><input type="text" ng-model="employee.phone" placeholder="Enter phone number"></td>
+    </tr>
+    
+    <tr>
+    <td>Password: </td>
+    <td><input type="text" ng-model="employee.password" placeholder="Enter password"></td>
+    </tr>
+    
+     <tr>
+    <td><button ng-click="register(employee)">register</button></td>
+    </tr>
+    </table>
+  </form>
+</div>
+
+</body>
+</html>
+
 }

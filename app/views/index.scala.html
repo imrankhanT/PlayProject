@@ -1,33 +1,32 @@
 @()
 
-@main("Welcome to Play") {
-  <h1 align="center">Welcome to Registration Form</h1>
+@main("Employee Form") {
   
   <form>
-  <table align="center">
-  <tr>
-  <td>Employee Name</td>
-  <td><input type="text" placeholder="Enter Name" id="name" class="css">
-  </tr>
-  
-  <tr>
-  <td>Email Id</td>
-  <td><input type="email" placeholder="Enter email" id="emmail" class="css">
-  </tr>
-  
-  <tr>
-  <td>Phone Number</td>
-  <td><input type="text" placeholder="Enter Phone Number" id="phone" class="css">
-  </tr>
-  
-  <tr>
-  <td>Password</td>
-  <td><input type="password" placeholder="Enter Password" id="password" class="css">
-  </tr>
-  
-  <tr>
-  <td><input type="submit" value="register" id="submit"></td>
-  </tr>
-  </table>
+   <table>
+    <tr>
+    <td>Name: </td>
+    <td><input type="text" ng-model="employee.name" placeholder="Enter Name"></td>
+    </tr>
+    
+    <tr>
+    <td>Email: </td>
+    <td><input type="email" ng-model="employee.email" placeholder="Enter Email"></td>
+    </tr>
+    
+    <tr>
+    <td>Phone: </td>
+    <td><input type="text" ng-model="employee.phone" placeholder="Enter phone number"></td>
+    </tr>
+    
+    <tr>
+    <td>Password: </td>
+    <td><input type="text" ng-model="employee.password" placeholder="Enter password"></td>
+    </tr>
+    
+     <tr>
+    <td><button ng-click="register(employee)">register</button></td>
+    </tr>
+    </table>
   </form>
 }
